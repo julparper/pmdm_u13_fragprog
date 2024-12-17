@@ -2,6 +2,7 @@ package com.example.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -12,7 +13,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.fragments.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentActionsListener {
 
     companion object{
         const val NOMBRE = "nombre"
@@ -50,5 +51,9 @@ class MainActivity : AppCompatActivity() {
             }
             derechaRojo = !derechaRojo
         }
+    }
+
+    override fun onClickFragmentButton() {
+        Toast.makeText(this, "Se ha pulsado el botón", Toast.LENGTH_SHORT).show()
     }
 }
