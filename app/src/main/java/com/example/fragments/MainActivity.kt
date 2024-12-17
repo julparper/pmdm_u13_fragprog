@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
@@ -13,8 +14,10 @@ import com.example.fragments.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        const val NOMBRE = "nombre"
+    }
     private lateinit var binding: ActivityMainBinding;
-
     private var derechaRojo = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
+            val bundle = Bundle()
+            bundle.putString(NOMBRE, "Hola")
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add<RedFragment>(binding.frgDer.id)
-                add<BlueFragment>(binding.frgIzq.id)
+                add<RedFragment>(binding.frgDer.id, args = bundle)
+                add<BlueFragment>(binding.frgIzq.id, args = bundle)
             }
         }
 
